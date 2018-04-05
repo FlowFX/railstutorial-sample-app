@@ -1,0 +1,192 @@
+# rubocop Usage: rubocop -R --auto-correct --only Style/AndOr
+#                rubocop -R --format offenses
+
+AllCops:
+  TargetRubyVersion: 2.5
+  DisplayCopNames: true
+  Exclude:
+    - .rubocop.yml
+    - bin/*
+    - db/structure.sql
+    - db/schema.rb
+    - stash/*
+
+  # Use haml-lint for app/views
+
+#
+# Custom Configs
+#
+
+Rails:
+  Enabled: true
+
+MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/CaseIndentation:
+  EnforcedStyle: end
+
+Layout/FirstParameterIndentation:
+  EnforcedStyle: consistent
+
+IndentHash: # TODO: combine IndentationConsistency and manually indent other keys
+  EnforcedStyle: consistent
+
+Naming/FileName:
+  Exclude:
+  - config/initializers/rack-heartbeat.rb
+  - spec/middlewares/rack-heartbeat_spec.rb
+
+#
+# HACKS (nearly disabled)
+#
+Metrics/AbcSize:
+  Max: 100 # default is 15
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+# Use empty lines between defs.
+Layout/EmptyLineBetweenDefs:
+  # If true, this parameter means that single line method definitions don't
+  # need an empty line between them.
+  AllowAdjacentOneLineDefs: false
+
+Style/WordArray:
+  MinSize: 3
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/EmptyLines:
+  Enabled: true
+
+#
+# Disabled Cops
+#
+
+# BUGGY AUTOCORRECT!!! corrections also modify semantic!
+Performance/Count:
+  Enabled: false
+
+TrailingBlankLines: # leave empty line at end of file, as github convention
+  Enabled: false
+
+# Autocorrect for NonNilCheck is not semantically stable.
+NonNilCheck:
+  Enabled: false
+
+# allow utf8 characters in comment
+Style/AsciiComments:
+  Enabled: false
+
+# i like to use inline rescue when useful
+Style/RescueModifier:
+  Enabled: false
+
+EndAlignment:
+  Enabled: false
+
+LineLength:
+  Enabled: false
+
+# disabled, because it would break on vars like: `broken_30m_segments`
+VariableNumber:
+  Enabled: false
+
+# don't think those conventions are useful (maybe as indicator for codesmells, but not to rename param)
+Lint/UnusedMethodArgument:
+  Enabled: false
+Lint/UnusedBlockArgument:
+  Enabled: false
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+# seems not so disturbing
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+# not needed, because simple indention is doing that job
+AlignHash:
+  Enabled: false
+
+# sometimes i like to use 2 blank lines to separate more between code regions
+# CUSTOM RUN: check for more than 2 sequentially removed lines
+EmptyLines:
+  Enabled: false
+
+# it looks more excplicit, there is an interpreted return value, when using return in method
+RedundantReturn:
+  Enabled: false
+
+# not consistently used in code, maybe there's also no ONE rule
+SpaceBeforeBlockBraces:
+  Enabled: false
+  EnforcedStyle: no_space
+
+# not needed for outcommented code
+Layout/LeadingCommentSpace:
+  Enabled: false
+Layout/CommentIndentation:
+  Enabled: false
+
+#
+# TBD - To be discussed (Disabled Cops)
+#
+Validation:
+  Enabled: false
+
+DynamicFindBy:
+  Enabled: false
+
+Layout/SpaceInsideBlockBraces:
+  Enabled: false
+
+# (tbd) => dunno why to prefer usage of "fail" instead of "raise"
+SignalException:
+  Enabled: false
+
+## on hold (tbd) => not sure if it's increasing readability
+RedundantSelf:
+  Enabled: false
+
+# i prefer underscoring method_params when ambigious with model properties
+# instead marking unused variables
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Lint/ParenthesesAsGroupedExpression:
+  Enabled: false
+
+#
+# Pending Offences (to be fixed in future)
+#
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+
+Style/SingleLineBlockParams:
+  Enabled: false
