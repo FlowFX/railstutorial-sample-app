@@ -26,6 +26,8 @@ end
 group :test do
   gem 'rails-controller-testing', '1.0.2'
   gem 'minitest-reporters',       '1.1.14'
+  # Temporary bugfix https://stackoverflow.com/questions/48411323/rails-5-1-4-test-throws-nameerror-only-when-testing-fails/48412986#48412986
+  gem 'minitest',                 '~>5.10.3'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
 end
