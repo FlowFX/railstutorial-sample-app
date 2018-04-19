@@ -23,6 +23,20 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'index as admin only shows activated users' do
+    # GIVEN a non-activated user
+    user = User.paginate(page: 1).first
+    user.toggle!(:activated)
+
+    # WHEN loading the User index
+    log_in_as(@admin)
+    get users_path
+    first_page_of_users = User.paginate(page: 1)
+
+    # THEN that user is not displayed
+    assert_no_match user.name, response.body
+  end
+
   test 'index as non-admin' do
     log_in_as(@non_admin)
     get users_path
