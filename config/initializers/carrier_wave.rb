@@ -1,5 +1,7 @@
 if Rails.env.production?
   CarrierWave.configure do |config|
+    config.fog_provider = 'backblaze'
+
     config.fog_credentials = {
       # Configuration for Amazon S3
       :provider              => 'backblaze',
@@ -8,6 +10,6 @@ if Rails.env.production?
       :b2_bucket_name        => ENV['B2_BUCKET_NAME'],
       :b2_bucket_id          => ENV['B2_BUCKET_ID'],
     }
-    # config.fog_directory     =  ENV['B2_BUCKET_ID']
+    config.fog_directory     =  ENV['B2_BUCKET_NAME']
   end
 end
