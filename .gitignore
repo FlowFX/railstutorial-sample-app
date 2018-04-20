@@ -27,3 +27,6 @@
 
 # Guard
 .spring/
+
+# Ignore uploaded test images.
+/public/uploads
